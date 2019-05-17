@@ -12,11 +12,13 @@
         "artesaos/seotools": "^0.14.0",
         "barryvdh/laravel-dompdf": "^0.8.4",
         "fideloper/proxy": "^4.0",
+        "fx3costa/laravelchartjs": "^2.5",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3.1",
         "mews/captcha": "^2.2",
         "unisharp/laravel-ckeditor": "^4.7",
+        "watson/active": "^3.1",
         "yajra/laravel-datatables-oracle": "^9.0"
     },
     "require-dev": {
@@ -44,6 +46,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/Helper.php"
         ]
     },
     "autoload-dev": {

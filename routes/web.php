@@ -12,8 +12,6 @@
 Route::get('/', 'LoginController@showLoginForm')->name('login');
 Route::post('login', 'LoginController@login')->name('proceed-login');
 
-
-
 Route::middleware(['auth'])->group(function () {
 
     //dashboard

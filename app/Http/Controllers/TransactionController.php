@@ -32,6 +32,7 @@ class TransactionController extends Controller
 
     public function source(){
         $query= Transaction::query();
+        $query->orderBy('date','desc');
         return DataTables::eloquent($query)
         ->filter(function ($query) {
             if (request()->has('search')) {
@@ -56,11 +57,11 @@ class TransactionController extends Controller
                 return number_format($data->amount,0,',','.');
             })
             ->addColumn('status', function ($data) {
-                return $data->status;
+                return $data->status == 'proses' ? '<span class="badge badge-danger">'.$data->status.'</span>':'<span class="badge badge-success">'.$data->status.'</span>';
             })
             ->addIndexColumn()
             ->addColumn('action', 'backend.transaction.index-action')
-            ->rawColumns(['action'])
+            ->rawColumns(['action','status'])
             ->toJson();
     }
 
@@ -156,12 +157,10 @@ class TransactionController extends Controller
     }
 
     private function generateInvoice($date){
-        $from = $date.' 00:00:00' ;
-        $to =  $date.' 23:59:59';
         $tanggal = substr($date,8,2);
         $bulan = substr($date,5,2);
         $tahun = substr($date,2,2);
-        $transaction = $this->transaction->whereBetween('date',[$from,$to])->get();
+        $transaction = $this->transaction->whereDate('date',$date)->get();
         $no = 'TRX-'.$tanggal.$bulan.$tahun.'-'.sprintf('%05s',$transaction->count()+1);
         return $no;
     }

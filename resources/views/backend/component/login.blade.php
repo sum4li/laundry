@@ -30,14 +30,15 @@
 
         <div class="card o-hidden border-0 shadow-lg my-5">
           <div class="card-body p-5">
-                @include('backend.component.success')
-                @include('backend.component.error')
+            @include('backend.component.success')
+            @include('backend.component.error')
             <!-- Nested Row within Card Body -->
             <div class="row">
 
               <div class="col-lg-12">
-                <div class="p-5">
-                  <div class="text-center">
+                  <div class="">
+                    <div class="text-center">
+                        <img src="{{asset('backend/img/logo.png')}}" width="100px">
                     <h1 class="h4 text-gray-900 mb-4">Selamat Datang</h1>
                   </div>
                   <form class="user" action="{{route('proceed-login')}}" method="POST">
