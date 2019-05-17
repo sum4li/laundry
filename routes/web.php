@@ -78,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/transaction/{id}/destroy','TransactionController@destroy')->name('transaction.destroy');
     Route::post('/admin/transaction/store','TransactionController@store')->name('transaction.store');
     Route::post('/admin/transaction/{id}/update','TransactionController@update')->name('transaction.update');
-    Route::get('/admin/transaction/export','TransactionController@export')->name('transaction.export');
+    Route::post('/admin/transaction/export','TransactionController@export')->name('transaction.export');
 
     //setting
     Route::get('/admin/setting','SettingController@index')->name('setting.index');

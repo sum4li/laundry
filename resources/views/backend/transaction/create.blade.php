@@ -42,7 +42,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label>Jumlah</label>
-                            <input type="text" name="qty[]" class="form-control" required="">
+                            <input type="text" name="qty[]" class="form-control harga" required="">
                         </div>
                     </div>
                 </div>
@@ -69,6 +69,7 @@
 </div>
 @endsection
 @push('scripts')
+<script src="{{asset('backend/js/jquery.mask.min.js')}}" type="text/javascript"></script>
 <script src="{{ asset('backend/js/sweet-alert.min.js') }}"></script>
 <script>
 $(document).ready(function () {
@@ -134,7 +135,7 @@ $(document).ready(function () {
                 '<div class="form-group row">'+
                     '<label class="col-lg-12">Jumlah</label>'+
                         '<div class="col-lg-10">'+
-                            '<input type="text" name="qty[]" class="form-control" required="">'+
+                            '<input type="text" name="qty[]" class="form-control harga" required="">'+
                         '</div>'+
                         '<div class="col-lg-2">'+
                             '<a href="#" class="btn btn-danger" id="remove_form"><i class="fa fa-times"></i></a>'+
@@ -143,6 +144,7 @@ $(document).ready(function () {
             '</div>'+
         '</div>').appendTo('.add_product');
         bootstrap_select_product('.product','body');
+        $('.harga').mask('9999999999',{placeholder: 'Harus Angka'});
     });
 
     $('body').on('click','#remove_form',function(e){
@@ -174,6 +176,8 @@ $(document).ready(function () {
             $('select[name="customer_id"]').removeAttr('disabled');
         }
     });
+
+    $('.harga').mask('9999999999',{placeholder: 'Harus Angka'});
 
 });
 </script>

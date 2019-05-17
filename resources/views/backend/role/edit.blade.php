@@ -8,7 +8,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">@yield('title')</h6>
         </div>
         <div class="card-body">
-            <form action="{{route('product.update',$data->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('role.update',$data->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col">
@@ -17,19 +17,13 @@
                           <input type="text" name="name" value="{{$data->name}}" class="form-control border-dark-50" required="">
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="form-group">
-                          <label>Harga</label>
-                          <input type="text" name="price" value="{{$data->price}}" class="form-control border-dark-50 harga" required="">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
                         <div class="form-gorup">
                             <button type="submit" class="btn btn-primary shadow-sm">Simpan</button>
-                            <a class="btn btn-light shadow-sm" href="{{route('product.index')}}">Batal</a>
+                            <a class="btn btn-light shadow-sm" href="{{route('role.index')}}">Batal</a>
                         </div>
                     </div>
                 </div>
@@ -38,13 +32,3 @@
     </div>
 </div>
 @endsection
-@push('scripts')
-<script src="{{asset('backend/js/jquery.mask.min.js')}}" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.harga').mask('9999999999',{placeholder: 'Harus Angka'});
-    });
-
-</script>
-
-@endpush

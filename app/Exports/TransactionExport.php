@@ -13,23 +13,23 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 // class TransactionExport implements FromCollection, WithMapping, WithHeadings
 class TransactionExport implements FromView
 {
+    private $from,$to;
 
     public function __construct()
     {
         $this->transaction = new Transaction();
     }
 
-    private $status;
-
-    public function setStatus($status){
-        $this->status = $status;
+    public function setDate($from,$to){
+        $this->from = $from.' 00:00:00';
+        $this->to = $to.' 23:59:59';
     }
 
 
     public function view(): View
     {
         return view('backend.transaction.export', [
-            'transaction' => $this->transaction->where('status',$this->status)->get()
+            'transaction' => $this->transaction->whereBetween('date',[$this->from,$this->to])->get()
         ]);
     }
 

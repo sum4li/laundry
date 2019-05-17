@@ -55,6 +55,18 @@
             <span>Setting</span>
         </a>
     </li>
+    <li class="nav-item {{request()->route()->getName() == 'user.index' ? 'active':''}}">
+        <a class="nav-link" href="{{route('user.index')}}">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Pengguna</span>
+        </a>
+    </li>
+    <li class="nav-item {{request()->route()->getName() == 'role.index' ? 'active':''}}">
+        <a class="nav-link" href="{{route('role.index')}}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Hak Akses</span>
+        </a>
+    </li>
 
 </ul>
 <!-- End of Sidebar -->

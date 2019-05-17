@@ -166,10 +166,10 @@ class TransactionController extends Controller
         return $no;
     }
 
-    public function export(){
-        $transaction = new TransactionExport;
-        $transaction->setStatus('lul');
-        return Excel::download($transaction, 'transaction.xlsx');
+    public function export(Request $request){
+        $transaction = new TransactionExport();
+        $transaction->setDate($request->from,$request->to);
+        return Excel::download($transaction, 'laporan_trx_'.$request->from.'_'.$request->to.'.xlsx');
     }
 
 }

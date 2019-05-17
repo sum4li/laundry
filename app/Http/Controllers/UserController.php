@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Role;
 
 class UserController extends Controller
 {
@@ -17,16 +18,16 @@ class UserController extends Controller
     public function __construct()
     {
         $this->user = new User();
+        $this->role = new Role();
     }
 
-    public function index($menu_id)
+    public function index()
     {
-        return view('backend.user.index',compact(['menu_id']));
+        return view('backend.user.index');
     }
 
-    public function source($menu_id){
+    public function source(){
         $query= User::query();
-        $query->where('menu_id',$menu_id);
         return DataTables::eloquent($query)
         ->filter(function ($query) {
             if (request()->has('search')) {
@@ -35,29 +36,30 @@ class UserController extends Controller
                 });
             }
             })
-            ->addColumn('url', function ($data) {
-                return str_limit($data->url,50);
+            ->addColumn('name', function ($data) {
+                return title_case($data->name);
 
             })
-            ->addColumn('name', function ($data) {
-                return str_limit($data->name,50);
+            ->addColumn('role', function ($data) {
+                return title_case($data->role->name);
             })
             ->addIndexColumn()
             ->addColumn('action', 'backend.user.index-action')
-            ->rawColumns(['action','image'])
+            ->rawColumns(['action'])
             ->toJson();
     }
 
-    public function create($menu_id)
+    public function create()
     {
-        return view('backend.user.create',compact(['menu_id']));
+        $role = $this->role;
+        return view('backend.user.create',compact(['role']));
     }
 
     public function store(Request $request)
     {
         DB::beginTransaction();
         try {
-            $request = $request->merge(['slug'=>str_slug($request->name)]);
+            $request = $request->merge(['password'=>Hash::make($request->password)]);
             $user = $this->user->create($request->all());
             DB::commit();
             return redirect()->route('user.index')->with('success-message','Data telah disimpan');
@@ -76,10 +78,11 @@ class UserController extends Controller
 
     }
 
-    public function edit($id,$menu_id)
+    public function edit($id)
     {
+        $role = $this->role;
         $data = $this->user->find($id);
-        return view('backend.user.edit',compact(['data','menu_id']));
+        return view('backend.user.edit',compact(['data','role']));
 
     }
 
@@ -87,7 +90,7 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $request = $request->merge(['slug'=>str_slug($request->name)]);
+            $request = $request->merge(['password'=>Hash::make($request->password)]);
             $this->user->find($id)->update($request->all());
             DB::commit();
             return redirect()->route('user.index',$request->menu_id)->with('success-message','Data telah dirubah');
