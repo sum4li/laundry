@@ -167,7 +167,7 @@ class TransactionController extends Controller
     }
 
     public function export(){
-        $transaction = new TransactionExport();
+        $transaction = new TransactionExport;
         $transaction->setStatus('lul');
         return Excel::download($transaction, 'transaction.xlsx');
     }

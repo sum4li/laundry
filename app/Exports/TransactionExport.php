@@ -13,23 +13,18 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 // class TransactionExport implements FromCollection, WithMapping, WithHeadings
 class TransactionExport implements FromView
 {
+
+    public function __construct()
+    {
+        $this->transaction = new Transaction();
+    }
+
     private $status;
 
     public function setStatus($status){
         $this->status = $status;
     }
 
-    public function __construct()
-    {
-        $this->transaction = new Transaction();
-    }
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    // public function collection()
-    // {
-    //     return $this->transaction->get();
-    // }
 
     public function view(): View
     {
