@@ -8,7 +8,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">@yield('title')</h6>
         </div>
         <div class="card-body">
-            <form action="{{route('product.update',$data->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('transaction.update',$data->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col">
@@ -29,7 +29,7 @@
                     <div class="col">
                         <div class="form-gorup">
                             <button type="submit" class="btn btn-primary shadow-sm">Simpan</button>
-                            <a class="btn btn-light shadow-sm" href="{{route('product.index')}}">Batal</a>
+                            <a class="btn btn-light shadow-sm" href="{{route('transaction.index')}}">Batal</a>
                         </div>
                     </div>
                 </div>

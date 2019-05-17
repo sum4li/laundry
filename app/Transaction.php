@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Traits\Uuids;
 
-class Product extends Model
+class Transaction extends Model
 {
     use SoftDeletes;
     use Uuids;
 
-    protected $table = 'products';
+    protected $table = 'transactions';
     protected $dates = ['deleted_at'];
-    protected $fillable = ['name','slug','price'];
+    protected $fillable = ['customer_id','invoice_no','date','amount','status'];
     public $incrementing = false;
+
+    public function customer()
+    {
+        return $this->belongsTo('App\Customer');
+    }
 }

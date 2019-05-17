@@ -144,6 +144,8 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Unisharp\Ckeditor\ServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -201,6 +203,9 @@ return [
         'SEOMeta'   => Artesaos\SEOTools\Facades\SEOMeta::class,
         'OpenGraph' => Artesaos\SEOTools\Facades\OpenGraph::class,
         'Twitter'   => Artesaos\SEOTools\Facades\TwitterCard::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
 
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

@@ -1,5 +1,5 @@
 @extends('backend.layouts')
-@section('title','Produk')
+@section('title','Customer')
 @section('content')
 <div class="col-lg-12">
     <div class="card shadow-sm mb-4">
@@ -7,12 +7,13 @@
                 <h6 class="m-0 font-weight-bold text-primary">@yield('title')</h6>
         </div>
         <div class="card-body">
-            <table class="table table-sm table-bordered" id="product-table">
+            <table class="table table-sm table-bordered" id="customer-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                        <th>Harga</th>
+                        <th>No Telp</th>
+                        <th>Email</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -27,23 +28,24 @@
 $(document).ready(function () {
 
     $.fn.dataTable.ext.errMode = 'throw';
-    var $table = $('#product-table').DataTable({
+    var $table = $('#customer-table').DataTable({
          processing: true,
          serverSide: true,
          responsive: true,
          stateSave: true,
          dom: '<"toolbar">rtp',
-         ajax: '{!! route('product.source') !!}',
+         ajax: '{!! route('customer.source') !!}',
          columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',width:"2%", orderable : false},
             // {data: 'code', name: 'code',width:"5%", orderable : false},
             {data: 'name', name: 'name',width:"15%", orderable : true},
-            {data: 'price', name: 'price',width:"20%", orderable : false},
+            {data: 'phone_number', name: 'phone_number',width:"10%", orderable : false},
+            {data: 'email', name: 'email',width:"10%", orderable : false},
             {data: 'action', name: 'action',width:"5%", orderable : false}
          ]
      });
 
-      $('#product-table_wrapper > div.toolbar').html('<div class="row">' +
+      $('#customer-table_wrapper > div.toolbar').html('<div class="row">' +
                 '<div class="col-lg-10">'+
                     '<div class="input-group mb-3"> ' +
                         '<input type="text" class="form-control form-control-sm border-0 bg-light" id="search-box" placeholder="Masukkan Kata Kunci"> ' +
@@ -53,7 +55,7 @@ $(document).ready(function () {
                     '</div>' +
                 '</div>'+
                 '<div class="col-lg-2">'+
-                    '<a href="{{ route("product.create") }}" class="btn btn-sm btn-primary btn-shadow float-right" data-toggle="tooltip" title="Tambah Data"><i class="fas fa-plus"></i></a>'+
+                    '<a href="{{ route("customer.create") }}" class="btn btn-sm btn-primary shadow-sm float-right" data-toggle="tooltip" title="Tambah Data"><i class="fas fa-plus"></i></a>'+
                 '</div>' +
                 '</div>');
 
@@ -63,7 +65,7 @@ $(document).ready(function () {
      });
 
 
-    $('#product-table').on('click','a.delete-data',function(e) {
+    $('#customer-table').on('click','a.delete-data',function(e) {
         e.preventDefault();
         var delete_link = $(this).attr('href');
         swal({

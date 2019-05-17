@@ -2,29 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Customer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 
-class ProductController extends Controller
+class CustomerController extends Controller
 {
 
     public function __construct()
     {
-        $this->product = new Product();
+        $this->customer = new Customer();
     }
 
     public function index()
     {
-        return view('backend.product.index');
-
+        return view('backend.customer.index');
     }
 
     public function source(){
-        $query= Product::query();
+        $query= Customer::query();
         return DataTables::eloquent($query)
         ->filter(function ($query) {
             if (request()->has('search')) {
@@ -36,28 +35,31 @@ class ProductController extends Controller
             ->addColumn('name', function ($data) {
                 return title_case($data->name);
             })
-            ->addColumn('price', function ($data) {
-                return number_format($data->price,0,',','.');
+            ->addColumn('email', function ($data) {
+                return $data->email;
+            })
+            ->addColumn('phone_number', function ($data) {
+                return title_case($data->phone_number);
             })
             ->addIndexColumn()
-            ->addColumn('action', 'backend.product.index-action')
+            ->addColumn('action', 'backend.customer.index-action')
             ->rawColumns(['action'])
             ->toJson();
     }
 
     public function create()
     {
-        return view('backend.product.create');
+        return view('backend.customer.create');
     }
 
     public function store(Request $request)
     {
         DB::beginTransaction();
         try {
-            $request->merge(['slug'=>str_slug($request->name)]);
-            $this->product->create($request->all());
+            $requset = $request->merge(['slug'=>$request->name]);
+            $this->customer->create($request->all());
             DB::commit();
-            return redirect()->route('product.index')->with('success-message','Data telah disimpan');
+            return redirect()->route('customer.index')->with('success-message','Data telah disimpan');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error-message',$e->getMessage());
@@ -67,15 +69,15 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $data = $this->product->find($id);
+        $data = $this->customer->find($id);
         return $data;
 
     }
 
     public function edit($id)
     {
-        $data = $this->product->find($id);
-        return view('backend.product.edit',compact('data'));
+        $data = $this->customer->find($id);
+        return view('backend.customer.edit',compact('data'));
 
     }
 
@@ -83,10 +85,10 @@ class ProductController extends Controller
     {
         DB::beginTransaction();
         try {
-            $request->merge(['slug'=>str_slug($request->name)]);
-            $this->product->find($id)->update($request->all());
+            $request = $request->merge(['slug'=>$request->name]);
+            $this->customer->find($id)->update($request->all());
             DB::commit();
-            return redirect()->route('product.index')->with('success-message','Data telah d irubah');
+            return redirect()->route('customer.index')->with('success-message','Data telah d irubah');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error-message',$e->getMessage());
@@ -96,8 +98,16 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        $this->product->destroy($id);
-        return redirect()->route('product.index')->with('success-message','Data telah dihapus');
+        $this->customer->destroy($id);
+        return redirect()->route('customer.index')->with('success-message','Data telah dihapus');
+    }
+
+    public function getCustomer(Request $request){
+        if ($request->has('search')) {
+            $cari = $request->search;
+    		$data = $this->customer->where('name', 'LIKE', '%'.$cari.'%')->get();
+            return response()->json($data);
+    	}
     }
 
 }

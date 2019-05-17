@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-
+use App\Product;
+use App\Customer;
+use App\Transaction;
 
 class LoginController extends Controller
 {
@@ -15,6 +16,13 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     protected $redirectTo = '/dashboard';
+
+    public function __construct()
+    {
+        $this->product = new Product();
+        $this->customer = new Customer();
+        $this->transaction = new Transaction();
+    }
 
     public function username()
     {
@@ -27,7 +35,10 @@ class LoginController extends Controller
     }
 
     public function dashboard(){
-        return view('backend.dashboard.index');
+        $product = $this->product;
+        $customer = $this->customer;
+        $transaction  = $this->transaction;
+        return view('backend.dashboard.index',compact(['product','customer','transaction']));
     }
 
 }

@@ -13,21 +13,14 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                          <label>Gambar</label>
-                          <input type="file" name="image[]" id="fileinput" class="form-control border-dark-50" required="" multiple>
-                        </div>
-                        <div class="form-group">
                           <label>Nama</label>
                           <input type="text" name="name" id="" class="form-control border-dark-50" required="">
-                          <input type="hidden" name="menu_id" value="{{$menu_id}}" class="form-control border-dark-50" required="">
                         </div>
+                    </div>
+                    <div class="col">
                         <div class="form-group">
-                          <label>SEO Keywords</label>
-                            <textarea name="keyword" class="form-control border-dark-50" required></textarea>
-                        </div>
-                        <div class="form-group">
-                          <label>Deskripsi</label>
-                            <textarea name="description" id="ckeditor" class="form-control border-dark-50" required></textarea>
+                          <label>Harga</label>
+                          <input type="number" name="price" id="" class="form-control border-dark-50" required="">
                         </div>
                     </div>
                 </div>
@@ -35,8 +28,8 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-gorup">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                            <a class="btn btn-light" href="{{route('product.index',$menu_id)}}">Batal</a>
+                            <button type="submit" class="btn btn-primary shadow-sm">Simpan</button>
+                            <a class="btn btn-light shadow-sm" href="{{route('product.index')}}">Batal</a>
                         </div>
                     </div>
                 </div>
@@ -45,28 +38,3 @@
     </div>
 </div>
 @endsection
-@push('scripts')
-<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-<script>
-
-    CKEDITOR.replace('ckeditor');
-
-    $('#fileinput').fileinput({
-        uploadUrl:'#',
-          browseClass: "btn btn-primary btn-block",
-          fileActionSettings:{
-            showZoom:false,
-            showUpload:false,
-            removeClass: "btn btn-danger",
-            removeIcon: "<i class='fa fa-trash'></i>"
-          },
-          showCaption: false,
-          showRemove: false,
-          showUpload: false,
-          showCancel: false,
-          dropZoneEnabled: false,
-          allowedFileExtensions: ['jpg', 'png','jpeg'],
-    });
-</script>
-
-@endpush

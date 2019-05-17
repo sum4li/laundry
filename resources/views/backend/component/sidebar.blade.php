@@ -3,7 +3,7 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-left justify-content-left" href="#">
-        <div class="sidebar-brand-text">{{App\Setting::where('slug','title')->get()->first()->description}}</div>
+        <div class="sidebar-brand-text">{{App\Setting::where('slug','nama-toko')->get()->first()->description}}</div>
     </a>
 
     <!-- Divider -->
@@ -18,28 +18,6 @@
             <span>Dashboard</span>
         </a>
     </li>
-    <li class="nav-item {{request()->route()->getName() == 'menuType.index' ? 'active':''}}">
-        <a class="nav-link" href="{{route('menuType.index')}}">
-            <i class="fas fa-fw fa-bars"></i>
-            <span>Tipe Menu</span>
-        </a>
-    </li>
-    <li class="nav-item {{request()->route()->getName() == 'menu.index' ? 'active':''}}">
-        <a class="nav-link" href="{{route('menu.index')}}">
-            <i class="fas fa-fw fa-bars"></i>
-            <span>Menu</span>
-        </a>
-    </li>
-
-    @foreach (App\Menu::orderBy('order','asc')->get() as $row)
-
-    <li class="nav-item {{request()->route()->getName() == $row->menu_type->route && request()->route('menu_id')==$row->id ? 'active':''}}">
-        <a class="nav-link" href="{{route($row->menu_type->route,$row->id)}}">
-            <i class="fas fa-fw fa-bullet"></i>
-            <span>{{title_case($row->name)}}</span>
-        </a>
-    </li>
-    @endforeach
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -47,16 +25,28 @@
     <div class="sidebar-heading">
         Addons
     </div>
-    <li class="nav-item {{request()->route()->getName() == 'slideshow.index' ? 'active':''}}">
-        <a class="nav-link" href="{{route('slideshow.index')}}">
-            <i class="fas fa-fw fa-images"></i>
-            <span>Slideshow</span>
+    <li class="nav-item {{request()->route()->getName() == 'product.index' ? 'active':''}}">
+        <a class="nav-link" href="{{route('product.index')}}">
+            <i class="fas fa-fw fa-boxes"></i>
+            <span>Produk</span>
         </a>
     </li>
-    <li class="nav-item {{request()->route()->getName() == 'socmed.index' ? 'active':''}}">
-        <a class="nav-link" href="{{route('socmed.index')}}">
-            <i class="fa fa-fw fa-share-alt"></i>
-            <span>Sosial Media</span>
+    <li class="nav-item {{request()->route()->getName() == 'customer.index' ? 'active':''}}">
+        <a class="nav-link" href="{{route('customer.index')}}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Customer</span>
+        </a>
+    </li>
+    <li class="nav-item {{request()->route()->getName() == 'transaction.create' ? 'active':''}}">
+        <a class="nav-link" href="{{route('transaction.create')}}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Transaksi</span>
+        </a>
+    </li>
+    <li class="nav-item {{request()->route()->getName() == 'transaction.create' ? 'active':''}}">
+        <a class="nav-link" href="{{route('transaction.index')}}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>List Transaksi</span>
         </a>
     </li>
     <li class="nav-item {{request()->route()->getName() == 'setting.index' ? 'active':''}}">

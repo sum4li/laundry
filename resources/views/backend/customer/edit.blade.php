@@ -8,7 +8,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">@yield('title')</h6>
         </div>
         <div class="card-body">
-            <form action="{{route('product.update',$data->id)}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('customer.update',$data->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col">
@@ -17,10 +17,18 @@
                           <input type="text" name="name" value="{{$data->name}}" class="form-control border-dark-50" required="">
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col">
                         <div class="form-group">
-                          <label>Harga</label>
-                          <input type="text" name="price" value="{{$data->price}}" class="form-control border-dark-50" required="">
+                          <label>No Telp</label>
+                          <input type="text" name="phone_number" value="{{$data->phone_number}}" class="form-control border-dark-50" required="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="text" name="email" value="{{$data->email}}" class="form-control border-dark-50" required="">
                         </div>
                     </div>
                 </div>
@@ -29,7 +37,7 @@
                     <div class="col">
                         <div class="form-gorup">
                             <button type="submit" class="btn btn-primary shadow-sm">Simpan</button>
-                            <a class="btn btn-light shadow-sm" href="{{route('product.index')}}">Batal</a>
+                            <a class="btn btn-light shadow-sm" href="{{route('customer.index')}}">Batal</a>
                         </div>
                     </div>
                 </div>
