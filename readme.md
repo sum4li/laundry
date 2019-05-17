@@ -1,6 +1,6 @@
 ## Laundry
 
-![](screenshot/login.png)
+![](screenshoot/login.png)
 
 Aplikasi Laundry
 
