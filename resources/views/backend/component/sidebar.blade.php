@@ -37,17 +37,18 @@
             <span>Customer</span>
         </a>
     </li>
-    <li class="nav-item {{active('transaction.create')}}">
-        <a class="nav-link" href="{{route('transaction.create')}}">
+    <li class="nav-item">
+        <a class="nav-link {{is_active('transaction.*') ? '':'collapsed'}}" href="#" data-toggle="collapse" data-target="#transaksi" aria-expanded="true" aria-controls="transaksi">
             <i class="fas fa-fw fa-book"></i>
             <span>Transaksi</span>
         </a>
-    </li>
-    <li class="nav-item {{active('transaction.create')}}">
-        <a class="nav-link" href="{{route('transaction.index')}}">
-            <i class="fas fa-fw fa-book"></i>
-            <span>List Transaksi</span>
-        </a>
+        <div id="transaksi" class="collapse {{is_active('transaction.*')  ? 'show':''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{active('transaction.create')}}" href="{{route('transaction.create')}}">Transaksi</a>
+            <a class="collapse-item {{active('transaction.index')}}" href="{{route('transaction.index')}}">List Transaksi</a>
+            <a class="collapse-item {{active('transaction.history')}}" href="{{route('transaction.history')}}">Riwayat Transaksi</a>
+            </div>
+        </div>
     </li>
     <li class="nav-item {{active('setting.index')}}">
         <a class="nav-link" href="{{route('setting.index')}}">
@@ -55,7 +56,19 @@
             <span>Setting</span>
         </a>
     </li>
-    <li class="nav-item {{active('user.index')}}">
+    <li class="nav-item">
+        <a class="nav-link {{is_active('user.index') || is_active('role.index') ? '':'collapsed'}}" href="#" data-toggle="collapse" data-target="#user" aria-expanded="true" aria-controls="user">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Manajemen Pengguna</span>
+        </a>
+        <div id="user" class="collapse {{is_active('user.index') || is_active('role.index')  ? 'show':''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{active('user.index')}}" href="{{route('user.index')}}">Pengguna</a>
+            <a class="collapse-item {{active('role.index')}}" href="{{route('role.index')}}">Hak Akses</a>
+            </div>
+        </div>
+    </li>
+    {{-- <li class="nav-item {{active('user.index')}}">
         <a class="nav-link" href="{{route('user.index')}}">
             <i class="fas fa-fw fa-users"></i>
             <span>Pengguna</span>
@@ -66,7 +79,7 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Hak Akses</span>
         </a>
-    </li>
+    </li> --}}
 
 </ul>
 <!-- End of Sidebar -->

@@ -38,7 +38,7 @@ $(document).ready(function () {
          responsive: true,
          stateSave: true,
          dom: '<"toolbar">rtp',
-         ajax: '{!! route("transaction.source","proses") !!}',
+         ajax: '{!! route("transaction.source","selesai") !!}',
          columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex',width:"2%", orderable : false},
             // {data: 'code', name: 'code',width:"5%", orderable : false},
@@ -62,9 +62,9 @@ $(document).ready(function () {
                     '</div>' +
                 '</div>'+
                 '<div class="col-lg-2">'+
-                    // '<span data-toggle="modal" data-target="#export">'+
-                    // '<a href="#export" class="btn btn-sm btn-success float-right" data-toggle="tooltip" title="Export ke Excel"><i class="fas fa-file-excel"></i></a>'+
-                    // '</span>'+
+                    '<span data-toggle="modal" data-target="#export">'+
+                    '<a href="#export" class="btn btn-sm btn-success float-right" data-toggle="tooltip" title="Export ke Excel"><i class="fas fa-file-excel"></i></a>'+
+                    '</span>'+
                 '</div>' +
                 '</div>');
 
@@ -90,32 +90,6 @@ $(document).ready(function () {
                     window.location.replace(delete_link);
                 } else {
                     swal("Data anda aman");
-                }
-            });
-    });
-
-    $('#transaction-table').on('click','a.complete-data',function(e) {
-        e.preventDefault();
-        var link = $(this).attr('href');
-        swal({
-            title: "Selesaikan Transaksi ini?",
-            text: "",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal({
-                        title : "Transaksi Selesai",
-                        icon: "success"
-                    });
-                    window.location.replace(link);
-                } else {
-                    swal({
-                        title : "Transaksi Belum selesai",
-                        icon: "warning"
-                    });
                 }
             });
     });

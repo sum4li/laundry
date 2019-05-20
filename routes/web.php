@@ -69,7 +69,8 @@ Route::middleware(['auth'])->group(function () {
     //transaction
     Route::get('/admin/transaction','TransactionController@index')->name('transaction.index');
     Route::get('/admin/transaction/create','TransactionController@create')->name('transaction.create');
-    Route::get('/admin/transaction/source','TransactionController@source')->name('transaction.source');
+    Route::get('/admin/transaction/history','TransactionController@history')->name('transaction.history');
+    Route::get('/admin/transaction/{status}/source','TransactionController@source')->name('transaction.source');
     Route::get('/admin/transaction/{id}/edit','TransactionController@edit')->name('transaction.edit');
     Route::get('/admin/transaction/{id}/print','TransactionController@print')->name('transaction.print');
     Route::get('/admin/transaction/{id}/show','TransactionController@show')->name('transaction.show');
@@ -77,6 +78,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/transaction/store','TransactionController@store')->name('transaction.store');
     Route::post('/admin/transaction/{id}/update','TransactionController@update')->name('transaction.update');
     Route::post('/admin/transaction/export','TransactionController@export')->name('transaction.export');
+    Route::post('/admin/transaction/export','TransactionController@export')->name('transaction.export');
+    Route::get('/admin/transaction/{id}/complete','TransactionController@complete')->name('transaction.complete');
 
     //setting
     Route::get('/admin/setting','SettingController@index')->name('setting.index');

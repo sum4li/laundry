@@ -30,8 +30,13 @@ class TransactionController extends Controller
         return view('backend.transaction.index');
     }
 
-    public function source(){
+    public function history(){
+        return view('backend.transaction.history');
+    }
+
+    public function source($status){
         $query= Transaction::query();
+        $query->where('status',$status);
         $query->orderBy('date','desc');
         return DataTables::eloquent($query)
         ->filter(function ($query) {
@@ -147,6 +152,14 @@ class TransactionController extends Controller
     {
         $this->transaction->destroy($id);
         return redirect()->route('transaction.index')->with('success-message','Data telah dihapus');
+    }
+
+    public function complete($id){
+        $transaction = $this->transaction->find($id);
+        $transaction->update([
+            'status'=>'selesai'
+        ]);
+        return redirect()->route('transaction.index')->with('success-message','Data telah disimpan');
     }
 
     public function print($id){
