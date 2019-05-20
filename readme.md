@@ -2,7 +2,7 @@
 
 ![](screenshoot/Login.png)
 
-Aplikasi Laundry simlple dibangun dengan laravel 5.8 dan Mysql
+Aplikasi Laundry simple dibangun dengan laravel 5.8 dan Mysql
 
 ## Fitur
 
